@@ -1,0 +1,14 @@
+ersion: '3'
+services:
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=fiap
+      - POSTGRES_PASSWORD=fiap
+      - POSTGRES_DB=bd_hackathon_doctor
+    volumes:
+      - ./data:/var/lib/postgresql/data
