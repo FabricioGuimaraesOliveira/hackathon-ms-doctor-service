@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fiap-doctor-ingress
+spec:
+  rules:
+    - host: fiap-doctor.example.com  # Substitua pelo domínio desejado
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-doctor-service
+                port:
+                  number: 80
