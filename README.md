@@ -1,5 +1,4 @@
 # hackathon-ms-doctor-service
-# Tech Challenge FIAP - Hackathon
 Hackathon - MVP Agendamentos de Consultas Médicas
 
 ### Grupo 2 - Membros:
