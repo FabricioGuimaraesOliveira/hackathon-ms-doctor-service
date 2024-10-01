@@ -39,8 +39,8 @@ public class BeanConfiguration {
 	}
 
 	@Bean
-	DoctorCalendarUseCase createDoctorCalendarUseCase(DoctorCalendarGateway doctorCalendarGateway) {
-		return new DoctorCalendarUseCase(doctorCalendarGateway);
+	DoctorCalendarUseCase createDoctorCalendarUseCase(DoctorCalendarGateway doctorCalendarGateway, ModelMapper mapper) {
+		return new DoctorCalendarUseCase(doctorCalendarGateway,mapper);
 	}
 
 }

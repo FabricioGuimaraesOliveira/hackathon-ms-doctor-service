@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: db-config
-data:
-  DATASOURCE_URL: jdbc:postgresql://db-svc:5432/bd_lanchonete

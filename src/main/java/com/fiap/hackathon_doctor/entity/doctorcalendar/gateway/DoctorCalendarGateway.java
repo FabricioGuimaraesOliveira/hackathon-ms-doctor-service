@@ -19,4 +19,5 @@ public interface DoctorCalendarGateway {
 
 	Page<DoctorCalendar> listarPaginado(Pageable pageable);
 
+	List<DoctorCalendar> buscarTodos();
 }
