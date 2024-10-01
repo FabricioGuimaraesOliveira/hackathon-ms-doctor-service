@@ -1,10 +1,13 @@
 package com.fiap.hackathon_doctor.infrastructure.doctor.dto.response;
 
 import com.fiap.hackathon_doctor.infrastructure.doctorcalendar.dto.response.DoctorCalendarResponseDTO;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
-
+@Getter
+@Setter
 public class DoctorResponseDTO {
 
 	private UUID id;

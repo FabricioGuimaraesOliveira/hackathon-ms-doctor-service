@@ -2,6 +2,7 @@ package com.fiap.hackathon_doctor.infrastructure.doctorcalendar.gateway;
 
 import com.fiap.hackathon_doctor.entity.doctorcalendar.gateway.DoctorCalendarGateway;
 import com.fiap.hackathon_doctor.entity.doctorcalendar.model.DoctorCalendar;
+import com.fiap.hackathon_doctor.entity.doctorcalendar.model.Status;
 import com.fiap.hackathon_doctor.infrastructure.persistence.doctor.DoctorEntity;
 import com.fiap.hackathon_doctor.infrastructure.persistence.doctorcalendar.DoctorCalendarEntity;
 import com.fiap.hackathon_doctor.infrastructure.persistence.doctorcalendar.DoctorCalendarRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class DoctorCalendarDataBaseRepository implements DoctorCalendarGateway {
 
@@ -25,11 +27,20 @@ public class DoctorCalendarDataBaseRepository implements DoctorCalendarGateway {
 		this.modelMapper = modelMapper;
 	}
 
+	public static DoctorCalendar toDomain(DoctorCalendarEntity entity) {
+		DoctorCalendar doctorCalendar = new DoctorCalendar();
+		doctorCalendar.setId(entity.getId());
+		doctorCalendar.setDoctorId(entity.getDoctorId());
+		doctorCalendar.setDataAgenda(entity.getDataAgenda());
+		doctorCalendar.setHoraAgenda(entity.getHoraAgenda());
+		doctorCalendar.setStatus(entity.getStatus());
+		return doctorCalendar;
+	}
 	@Override
 	public DoctorCalendar salvar(DoctorCalendar doctorCalendar) {
 		var doctorCalendarEntity = doctorCalendarRepository
 			.saveAndFlush(modelMapper.map(doctorCalendar, DoctorCalendarEntity.class));
-		return modelMapper.map(doctorCalendarEntity, DoctorCalendar.class);
+		return toDomain(doctorCalendarEntity);
 	}
 
 	@Override
@@ -54,7 +65,7 @@ public class DoctorCalendarDataBaseRepository implements DoctorCalendarGateway {
 		var doctorCalendar = doctorCalendarRepository.findDoctorCalendarEntityByDoctorIdAndDataAgendaAndHoraAgenda(
 				UUID.fromString(doctorId), dataAgenda, horaAgenda);
 
-		return doctorCalendar.map(entity -> modelMapper.map(entity, DoctorCalendar.class));
+		return 	Optional.of(toDomain(doctorCalendar.get()));
 
 	}
 
@@ -64,5 +75,11 @@ public class DoctorCalendarDataBaseRepository implements DoctorCalendarGateway {
 		return doctorCalendarEntitiesPage
 			.map(doctorEntity -> modelMapper.map(doctorCalendarEntitiesPage, DoctorCalendar.class));
 	}
-
+	@Override
+	public List<DoctorCalendar> buscarTodos() {
+		var doctorCalendarEntities = doctorCalendarRepository.findByStatus(Status.DISPONIVEL);
+		return doctorCalendarEntities.stream()
+				.map(entity -> modelMapper.map(entity, DoctorCalendar.class))
+				.collect(Collectors.toList());
+	}
 }

@@ -9,23 +9,21 @@ import java.util.UUID;
 public class Doctor {
 
 	private UUID id;
-
 	private String nome;
-
 	private String cpf;
-
 	private String numeroCrm;
-
 	private String email;
-
 	private String senha;
-
 	private String especialidade;
-
 	private List<DoctorCalendar> horariosDisponiveis;
 
+	// Construtor vazio
+	public Doctor() {
+	}
+
+	// Construtor com parâmetros
 	public Doctor(UUID id, String nome, String cpf, String numeroCrm, String email, String senha,
-			String especialidade) {
+				  String especialidade) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -84,10 +82,6 @@ public class Doctor {
 		}
 		if (this.senha == null || this.senha.isEmpty()) {
 			throw new IllegalArgumentException("Senha não pode ser nulo ou vazio");
-		}
-
-		if (this.especialidade == null || this.especialidade.isEmpty()) {
-			throw new IllegalArgumentException("Especialidade não pode ser nulo ou vazio");
 		}
 	}
 

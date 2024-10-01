@@ -21,6 +21,8 @@ public class DoctorCalendar {
 		this.horaAgenda = horaAgenda;
 		this.status = status;
 	}
+	public DoctorCalendar() {
+	}
 
 	public UUID getId() {
 		return id;
@@ -40,6 +42,10 @@ public class DoctorCalendar {
 
 	public Status getStatus() {
 		return status;
+	}
+
+	public UUID setId(UUID id) {
+		return this.id=id;
 	}
 
 	public void validarCadastro() {

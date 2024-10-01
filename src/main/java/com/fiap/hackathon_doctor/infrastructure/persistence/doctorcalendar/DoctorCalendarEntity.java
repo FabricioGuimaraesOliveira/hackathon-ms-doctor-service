@@ -3,6 +3,8 @@ package com.fiap.hackathon_doctor.infrastructure.persistence.doctorcalendar;
 import com.fiap.hackathon_doctor.entity.doctorcalendar.model.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -12,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "doctor_calendar")
+@Table(name = "calendar")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class DoctorCalendarEntity {
 
@@ -27,7 +29,7 @@ public class DoctorCalendarEntity {
 
 	@Column(nullable = false)
 	private String horaAgenda;
-
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Status status;
 
